@@ -16,6 +16,7 @@ wasm-bindgen-test = "0.3.18"
 
 [dependencies]
 seed = "0.8.0"
+serde = "1.0.129"
 wasm-bindgen = { version = "0.2.70" }
 
 [profile.release]
