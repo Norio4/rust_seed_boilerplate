@@ -58,9 +58,10 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
                     Msg::FetchedIp(get_ip().await)
                 }
             });
-        }, Msg::FetchedIp(Ok(response_data)) => {
+        },
+        Msg::FetchedIp(Ok(response_data)) => {
            model.my_ip = response_data.myip;
-        }
+        },
         Msg::FetchedIp(Err(error)) => {
             log!(error);
             model.my_ip = "Error Occurred in Fetching My Ip.".to_string();
