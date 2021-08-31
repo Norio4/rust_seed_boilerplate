@@ -11,6 +11,7 @@ fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
         counter_1: 0,
         counter_2: 0,
         my_ip: String::new(),
+        api_loading: false,
     }
 }
 
@@ -22,6 +23,7 @@ struct Model {
     counter_1: i32,
     counter_2: i32,
     my_ip: String,
+    api_loading: bool,
 }
 
 #[derive(Deserialize, Debug)]
@@ -54,6 +56,9 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::Decrement2 => model.counter_2 -= 1,
         Msg::GetRequest => {
             orders.skip().perform_cmd({
+                model.api_loading = true;
+                log!("Start call");
+                log!(model.api_loading);
                 async {
                     Msg::FetchedIp(get_ip().await)
                 }
@@ -61,10 +66,14 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         },
         Msg::FetchedIp(Ok(response_data)) => {
            model.my_ip = response_data.myip;
+            model.api_loading = false;
+            log!("OK");
+            log!(model.api_loading);
         },
         Msg::FetchedIp(Err(error)) => {
             log!(error);
             model.my_ip = "Error Occurred in Fetching My Ip.".to_string();
+            model.api_loading = false;
         }
     }
 }
@@ -122,7 +131,9 @@ fn view(model: &Model) -> Node<Msg> {
             div![model.my_ip.clone()],
             button![
                 C!["uk-button uk-button-default uk-button-small"],
-                ev(Ev::Click, |_| Msg::GetRequest), "IP取得"
+                attrs![At::Disabled => model.api_loading.as_at_value()],
+                IF!(not(model.api_loading) =>  ev(Ev::Click, |_| Msg::GetRequest)),
+                "IP取得"
             ],
         ],
     ]
