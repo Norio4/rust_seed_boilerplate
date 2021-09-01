@@ -20,9 +20,21 @@ cargo make serve
 localhost:9090
 ```
 
+## Troubleshooting
+
+###  failed to run custom build command for `openssl-sys v0.9.xx`
+
+on Ubuntu
+
+```
+    apt-get update -y
+    apt-get install -y libssl-dev
+    apt-get install -y pkg-config
+```
+
 
 ## In progress
 
-* Fetch API
-* Many components
-* Integration with background API [ActixWebBoilerplate](https://github.com/Norio4/rust_actixweb_boilerplate)
+- [ ] Fetch API
+- [ ] Many components
+- [ ] Integration with background API [ActixWebBoilerplate](https://github.com/Norio4/rust_actixweb_boilerplate)
