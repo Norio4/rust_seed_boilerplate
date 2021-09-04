@@ -11,14 +11,16 @@ The Rust Seed Boilerplate is a boilerplate for developers who want to get starte
 ## Setup
 
 ```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rls rust-analysis rust-src
-cargo install cargo-edit cargo-make
-cargo make build
-cargo make serve
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ . "$HOME/.cargo/env"
+$ rustup component add rls rust-analysis rust-src
+$ cargo install cargo-edit cargo-make
+$ cargo make build
+$ cargo make serve
 
-localhost:9090
+Start server on localhost:9090
 ```
+
 
 ## Troubleshooting
 
@@ -38,3 +40,5 @@ on Ubuntu
 - [ ] Fetch API
 - [ ] Many components
 - [ ] Integration with background API [ActixWebBoilerplate](https://github.com/Norio4/rust_actixweb_boilerplate)
+
+
